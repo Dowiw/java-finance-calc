@@ -1,4 +1,5 @@
 // Transaction.java
+
 public class Transaction {
     private double amount;
     private String description;
