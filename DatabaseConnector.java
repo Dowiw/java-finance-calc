@@ -41,3 +41,24 @@ public class DatabaseConnector {
             System.err.println("Error inserting data: " + e.getMessage());
         }
     }
+        // Method to fetch data from the database
+    public void fetchData(String tableName) {
+        String query = "SELECT * FROM " + tableName;
+
+        try (Connection connection = connect(); PreparedStatement preparedStatement = connection.prepareStatement(query); ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                System.out.println("Row: " + resultSet.getString(1) + ", " + resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching data: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        DatabaseConnector dbConnector = new DatabaseConnector();
+
+        // Example usage
+        dbConnector.insertData("your_table_name", "column1", "value1", "column2", "value2");
+        dbConnector.fetchData("your_table_name");
+    }
+}
