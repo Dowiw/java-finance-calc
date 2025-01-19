@@ -5,19 +5,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseConnector {
-    // Database URL, username, and password
     private static final String DB_URL = "jdbc:mysql://localhost:3306/your_database_name";
-    private static final String DB_USER = "your_username";
-    private static final String DB_PASSWORD = "your_password";
+    private static final String DB_USER = "-";
+    private static final String DB_PASSWORD = "-";
 
-    // Method to establish a connection to the database
+    //Connection to database
     public Connection connect() {
         Connection connection = null;
         try {
-            // Load MySQL JDBC driver (optional for newer versions of Java)
+            // Load MySQL JDBC
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish the connection
+            // Establish connection
             connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
             System.out.println("Database connected successfully!");
         } catch (ClassNotFoundException e) {
@@ -28,7 +27,7 @@ public class DatabaseConnector {
         return connection;
     }
 
-    // Method to insert data into the database
+    // Insert Data
     public void insertData(String tableName, String column1, String value1, String column2, String value2) {
         String query = "INSERT INTO " + tableName + " (" + column1 + ", " + column2 + ") VALUES (?, ?)";
 
@@ -41,7 +40,7 @@ public class DatabaseConnector {
             System.err.println("Error inserting data: " + e.getMessage());
         }
     }
-        // Method to fetch data from the database
+        //Fetch Data
     public void fetchData(String tableName) {
         String query = "SELECT * FROM " + tableName;
 
